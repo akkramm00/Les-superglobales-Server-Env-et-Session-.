@@ -53,5 +53,41 @@ if (isset($_ENV['PATH'])) {
 }
 ?>
 
+    
+
+    <h2> PARTIE TROIS DU COURS .</h2>
+	<pre>
+	<h1>Connexion</h1>
+	<form method="POST" action= "<?php echo $_SERVER['PHP_SELF']?>">
+		<label for="nom_utilisateur">Nom d'utilisateur :</label>
+		<input type="text" id="nom_utilisateur" name="nom_utilisateur"><br><br>
+		<label for="mot_de_passe">Mot de passe :</label>
+		<input type="password" id="mot_de_passe" name="mot_de_passe"><br><br>
+		<button type="submit" name="submit">Se connecter</button>
+	</form>
+</pre>
+</body>
+</html>
+<?php
+if ($_SERVER['REQUEST_METHOD'] === "POST" ){
+echo "<br>";
+echo " La requête est de type ".$server_method;
+}
+echo "<br>";
+$serv_root = $_SERVER['SystemRoot']; // C:\\WINDOWS
+echo $serv_root;
+$serv_root_2 = str_replace('C:\\', "" , $serv_root);
+echo "<br>";
+echo " Le système d'exploitation est ".$serv_root_2;
+echo "<br>";
+$serv_protocol = $_SERVER['SERVER_PROTOCOL'];
+if ($serv_protocol === 'HTTPS') { 
+	echo " Ce site web est sécurisé avec le protocole HTTPS";
+} else {
+	echo " Ce site web n'est pas sécurisé , opté pour un accès avec protocole HTTPS";
+}
+?>
+    
+
   </body>
 </html>
