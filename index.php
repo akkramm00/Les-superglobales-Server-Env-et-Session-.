@@ -136,5 +136,39 @@ echo $nom_utilisateur; // affiche " Alexandre "
 
 ?> 
 
+<h2> 7EME PARTIE DU COURS :CONNEXION FORM !.</h2>   
+	<h3>Connexion</h3>
+	<form method="POST" action="">
+		<label for="username">Nom d'utilisateur:</label>
+		<input type="text" name="username" id="username"><br>
+		<label for="password">Mot de passe:</label>
+		<input type="password" name="password" id="password"><br>
+		<input type="submit" value="Se connecter">
+	</form>
+
+  <?php 
+if($_SERVER['REQUEST_METHOD'] === "POST") {
+    if(isset($_POST['username']) && isset($_POST['password'])) {
+        $username  = $_POST['username'];
+        $password  = $_POST['password'];
+        if ( $username === 'admin' AND $password == 'admin' ) {
+            //Initialisation de notre session en tant qu'administrateur 
+            $_SESSION['admin'] = true;
+            $_SESSION['username'] = $username;
+            // redirection 
+            echo "Bienvenue à toi, $username";
+        } else if ( $username === 'user' AND $password == 'user' ) {
+            //Initialisation de notre session en tant qu'utilisateur
+            $_SESSION['admin'] = false;
+            $_SESSION['username'] = $username;
+            // création du cookie utilisateur
+            echo "Bienvenue à toi, $username";
+        } else {
+            echo "<p>Nom d'utilisateur ou mot de passe incorrect.</p>";
+        }
+    }
+}
+?>
+
   </body>
 </html>
