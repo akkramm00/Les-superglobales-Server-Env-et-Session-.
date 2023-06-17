@@ -87,6 +87,31 @@ if ($serv_protocol === 'HTTPS') {
 	echo " Ce site web n'est pas sécurisé , opté pour un accès avec protocole HTTPS";
 }
 ?>
+
+
+<h2>QUATRIEME PARTIE DU COURS</h2>
+<h3> tableaux associatif contienant deux produits</h3>
+
+<?php
+// tableau associatif qui contient 2 produits 
+$produits = [
+['id' => 1, 'description' => ' Produit 1'],
+['id' => 2, 'description' => ' Produit 2']
+];
+$produitnull = false;
+if($_SERVER['REQUEST_METHOD'] === "GET" && isset($_GET['id'])) {
+$idproduit = $_GET['id'];
+foreach ($produits as $produit) {
+if ($produit['id'] == $idproduit) { 
+echo " La description du produit : " .$produit['description'];
+$produitnull = true;	
+}
+}
+if(!$produitnull) { 
+echo " Produit non trouvé avec l'id ".$idproduit;
+}
+}
+?>
     
 
   </body>
