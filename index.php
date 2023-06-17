@@ -170,5 +170,23 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
 }
 ?>
 
+
+<h2> 8EME PARTIE DU COURS :ENVIRONNEMENT ET SESSION !</h2>  
+<?php 
+
+$dbhost = $_ENV['DB_HOST'] = 'localhost';
+$dbname = $_ENV['DB_NAME'] = 'env';
+$dbuser = $_ENV['DB_USER'] = 'admin';
+$dbpassword = $_ENV['DB_PASSWORD'] = 'admin';
+try {
+   $pdo = new PDO("mysql:$dbhost;dbname:$dbname",$dbuser,$dbpassword);
+   echo "<br>";
+   echo " Connexion à la base de donnée";
+   }
+   catch (PDOException $e) {
+  	echo " Erreur de connexion à la base de donnée ". $e->getMessage();
+   }
+?>
+
   </body>
 </html>
