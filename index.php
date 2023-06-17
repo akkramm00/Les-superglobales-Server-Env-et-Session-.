@@ -520,6 +520,18 @@ else {
 
 <h2>FORMULAIRE DE COMMENDE </h2>
 
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+      <label for="nom">Nom :</label>
+      <input type="text" name="nom" id="nom" required><br><br>
+      <label for="adresse">Adresse :</label>
+      <textarea name="adresse" id="adresse" required></textarea><br><br>
+      <label for="produit">Produit :</label>
+     <input type="text" name="produit" id="produit" required><br><br>
+      <label for="prix">Prix :</label>
+      <input type="number" name="prix" id="prix" required><br><br>
+      <input type="submit" value="Envoyer">
+    </form>
+
 <?php
 
     if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -546,6 +558,117 @@ else {
 fclose($file);
 
 ?>
+
+<!--=================================================================-->
+
+<h1> LES PROJECTS </h1>
+<h2>Manipulelr les projets</h2>
+
+<?php
+
+if(isset($_GET['plat']) && !empty($_GET['plat'])) {
+  $plat = $_GET['plat'];
+} else {
+  $plat = 'Plat non défini';
+}
+?>
+
+<a href="?plat=pizza"> Plat 1 </a><br>
+<a href="?plat=salade"> Plat 2 </a><br>
+
+<?php
+echo '<br>';
+echo $plat;
+echo '</br>';
+
+?>
+
+<!--=================================================================-->
+
+<h2>START PROJECTS</h2>
+
+<?php
+
+	// Vérifie si le paramètre "id" est présent dans l'URL
+	if(isset($_GET['id'])) {
+		// Vérifie si l'id afficher dans l'URL correspond à la valeur 1
+		if($_GET['id'] === '1') {
+			// Affiche la div 1
+			echo '<div><p>Contenu de la div 1</p></div>';
+		} if($_GET['id'] === '2')  {
+			// Affiche la div 2
+			echo '<div ><p>Contenu de la div 2</p></div>';
+	
+        } 
+  }
+    
+?>
+
+<!--=================================================================-->
+<h2>VERIFIER SI LES CHAMPS ONT ET SOUMIS</h2>
+
+<?php
+// Vérifie si les champs ont été soumis
+if (isset($_POST['pseudo']) && isset($_POST['password'])) {
+    $pseudo = $_POST['pseudo'];
+    $password = $_POST['password'];
+    // exemple de validation
+    if (empty($pseudo) || empty($password)) {
+        echo "Veuillez entrer un pseudo et un mot de passe";
+    } else {
+        echo "Bienvenue, $pseudo !";
+    }
+}
+?>
+
+<form action="form.php" method="POST">
+    <label for="pseudo">Pseudo :</label>
+    <input type="text" id="pseudo" name="pseudo">
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password"><br><br>
+    <input type="submit" value="Envoyer">
+</form>
+
+<!--=================================================================-->
+
+<h2> MANIPULATION DES IMAGES</h2>
+
+<?php
+if (isset($_POST['submit']) && isset($_FILES['photo'])) {
+    // récupérer des informations sur notre image
+    $image_name = $_FILES['photo']['name']; // nom de notre fichier
+    $image_tmp_name = $_FILES['photo']['tmp_name']; // dossier temporaire 
+    $image_error = $_FILES['photo']['error']; // valeur d'erreur de notre image
+    if ($image_error === 0) {
+        // Enregistrer l'image dans notre dossier uploads
+        $destination = "uploads/" . $image_name ; // uploads/1.png 
+        move_uploaded_file($image_tmp_name, $destination);
+        echo "L'image a bien été enregistrée";
+    } else {
+        echo "Il y a eu une erreur lors du téléchargement de l'image";
+    }
+}
+?>
+
+<form action="upload.php" method="post" enctype="multipart/form-data">
+  <label for="image">Choisir une image :</label>
+  <input type="file" name="photo" id="image">
+  <button type="submit" name="submit">Envoyer</button>
+</form>
+
+<!--=================================================================-->
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
