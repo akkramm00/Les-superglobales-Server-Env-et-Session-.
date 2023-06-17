@@ -122,7 +122,19 @@ $_SESSION['username'] = 'JohnDoe';
 echo $_SESSION['username']; // Affiche 'JohnDoe'
 ?> 
 
-    
+<h2> SIXIEME  PARTIE DU COURS : DEMARRAGE SESSION.</h2>   
+
+<?php
+// démarrer une session
+//Session_start();
+// stocker une valeur dans la superglobale $_SESSION
+$_SESSION['nom_utilisateur'] = "Alexandre" ;
+// récupérer la valeur de la superglobale $_SESSION
+$nom_utilisateur = $_SESSION['nom_utilisateur'];
+// afficher la valeur de la superglobale $_SESSION
+echo $nom_utilisateur; // affiche " Alexandre "
+
+?> 
 
   </body>
 </html>
