@@ -339,5 +339,216 @@ fclose($file_update);
 
 <!--=================================================================-->
 
+ <?php
+  if (!copy('source.txt', 'destination.txt')) {
+      echo "La copie du fichier a échoué";
+  }
+
+?> 
+
+<!--=================================================================-->
+
+<?php
+
+if (copy('image.jpg', 'images/image.jpg')) {
+    echo "Le fichier a été copié avec succès";
+} else {
+    echo "La copie du fichier a échoué";
+}
+
+?> 
+
+<!--=================================================================-->
+
+<?php
+
+  if (!rename('ancien_nom.txt', 'nouveau_nom.txt')) {
+      echo "Operation échoué";
+  }
+    
+?> 
+
+<!--=================================================================-->
+
+<?php
+
+  if (!unlink('nom_du_fichier.txt')) {
+      echo "La suppression du fichier a échoué";
+  }
+?>
+<!--=================================================================-->
+
+<?php
+
+$file = "mon_fichier.txt";
+if (file_exists($file)) {
+    echo "Le fichier $file existe.";
+} else {
+    echo "Le fichier $file n'existe pas.";
+}
+
+?>
+
+<!--=================================================================-->
+
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === "POST") {
+    $file = $_FILES['file']['name'];
+    $destination = "uploads/";
+    $target_dir = $destination . basename($file);
+    if (file_exists($target_dir)) {
+        $backup_file = $destination . 'backup' . basename($file); 
+        copy($target_dir, $backup_file);
+        $rename_file = $destination . 'rename' . basename($file);
+        rename($target_dir, $rename_file);
+        unlink($backup_file);
+        echo "Le fichier a bien été remplacé avec succès";
+    } else { 
+        move_uploaded_file($_FILES['file']['tmp_name'], $target_dir);
+        echo "Le fichier ".$file." a bien été téléchargé";
+    }
+} else { 
+    echo "Il y a eu une erreur lors du téléchargement du fichier";
+}
+
+?>
+<!--=================================================================-->
+
+<?php
+
+if(is_dir('documents')) {
+    echo " Le répertoire 'documents' existe déjà<br> ";
+}else { 
+    if(mkdir('documents')){
+        echo " Le répertoire 'documents' a bien été crée <br>";
+    }
+}
+
+?>
+<!--=================================================================-->
+
+<?php
+
+if(is_dir('documents')) {
+    echo " Le répertoire 'documents' existe déjà<br> ";
+}else { 
+    if(mkdir('documents')){
+        echo " Le répertoire 'documents' a bien été crée <br>";
+    }
+}
+
+$file = fopen('documents/monfichier.txt', 'w');
+if($file) { 
+    fwrite($file, " Voici un texte d'exemple");
+    fclose($file);
+} else 
+{ 
+    echo " Impossible de créer le fichier dans le repertoire 'documents'";
+}
+
+?>
+
+<!--=================================================================-->
+
+<?php
+
+if(is_dir('documents')) {
+    echo " Le répertoire 'documents' existe déjà<br> ";
+}else { 
+    if(mkdir('documents')){
+        echo " Le répertoire 'documents' a bien été crée <br>";
+    }
+}
+
+$file = fopen('documents/monfichier.txt', 'w');
+if($file) { 
+    fwrite($file, " Voici un texte d'exemple");
+    fclose($file);
+} else 
+{ 
+    echo " Impossible de créer le fichier dans le repertoire 'documents'";
+}
+if(file_exists('documents/monfichier.txt')) {
+if(is_dir('backup')) {
+    echo " Le répertoire 'backup' existe déjà <br>";
+}
+else { 
+    mkdir('backup');
+    if(copy('documents/monfichier.txt', 'backup/mon fichier'));
+    echo " le fichier 'monfichier.txt' a bien été copié dans le répertoire 'backup' ";
+}}
+
+?>
+
+<!--=================================================================-->
+
+    <h1>Formulaire de commande</h1>
+    <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+      <label for="nom">Nom :</label>
+      <input type="text" name="nom" id="nom" required><br><br>
+      <label for="adresse">Adresse :</label>
+      <textarea name="adresse" id="adresse" required></textarea><br><br>
+      <label for="produit">Produit :</label>
+     <input type="text" name="produit" id="produit" required><br><br>
+      <label for="prix">Prix :</label>
+      <input type="number" name="prix" id="prix" required><br><br>
+      <input type="submit" value="Envoyer">
+    </form>
+
+    <?php
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $nom_client = $_POST['nom'];
+        $adresse_client = $_POST['adresse'];
+        $produit_commande = $_POST['produit'];
+        $prix_commande = $_POST['prix'];    
+        $file = fopen('commandes.txt', 'a');    
+        fwrite($file, "$nom_client, $adresse_client, $produit_commande, $prix_commande\n");
+        fclose($file);    
+        echo "La commande a été enregistrée avec succès !<br>";   
+        if (!is_dir('backup')) {
+            mkdir('backup');
+        }
+        copy('commandes.txt', 'backup/commandes_backup.txt');    
+        echo "La commande a été sauvegardée avec succès !";
+    }
+
+    $file = fopen('commandes.txt', 'r');
+    ?>
+<!
+<!--=================================================================-->
+
+<h2>FORMULAIRE DE COMMENDE </h2>
+
+<?php
+
+    if($_SERVER["REQUEST_METHOD"] == "POST"){
+        $nom_client = $_POST['nom'];
+        $adresse_client = $_POST['adresse'];
+        $produit_commande = $_POST['produit'];
+        $prix_commande = $_POST['prix'];    
+        $file = fopen('commandes.txt', 'a');    
+        fwrite($file, "$nom_client, $adresse_client, $produit_commande, $prix_commande\n");
+        fclose($file);    
+        echo "La commande a été enregistrée avec succès !<br>";   
+        if (!is_dir('backup')) {
+            mkdir('backup');
+        }
+        copy('commandes.txt', 'backup/commandes_backup.txt');    
+        echo "La commande a été sauvegardée avec succès !";
+    }
+
+    $file = fopen('commandes.txt', 'r');
+    while(!feof($file)) {
+    $line = fgets($file);
+    echo "<br>".$line;
+}
+fclose($file);
+
+?>
+
+
+
+
   </body>
 </html>
