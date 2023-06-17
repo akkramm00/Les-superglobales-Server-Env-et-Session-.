@@ -112,6 +112,16 @@ echo " Produit non trouvé avec l'id ".$idproduit;
 }
 }
 ?>
+
+
+<h2> CINQUIEME PARTIE DU COURS : START8 SESSION.</h2>
+
+<?php
+//session_start();
+$_SESSION['username'] = 'JohnDoe';
+echo $_SESSION['username']; // Affiche 'JohnDoe'
+?> 
+
     
 
   </body>
