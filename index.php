@@ -208,6 +208,18 @@ echo $plat;
 echo '</br>';
 ?>
 
+<h2> LA MANIPULATION DES FICHIERS</h2>
+
+    <?php
+$file = fopen("monfichier.txt", "r");
+if ($file) {
+    while (($line = fgets($file)) !== false) {
+        echo $line;
+    }
+    fclose($file);
+}
+?> 
+
 
   </body>
 </html>
