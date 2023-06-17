@@ -90,7 +90,7 @@ if ($serv_protocol === 'HTTPS') {
 
 
 <h2>QUATRIEME PARTIE DU COURS</h2>
-<h3> tableaux associatif contienant deux produits</h3>
+<h3> tableaux associatif contenant deux produits</h3>
 
 <?php
 // tableau associatif qui contient 2 produits 
