@@ -36,5 +36,22 @@
       echo "Le nom du serveur est : " . $server_soft;
       echo "<br>";
     ?>
+<h2>DEUXIEME PARTIE</h2>
+     <?php
+// Initialisation de la session
+//session_start();
+// Stocker une valeur dans la session
+$_SESSION['username'] = 'JohnDoe';
+
+// Afficher quelques informations sur le serveur
+echo 'Nom du serveur : ' . $_SERVER['SERVER_NAME'] . '<br>';
+echo 'Adresse IP du client : ' . $_SERVER['REMOTE_ADDR'] . '<br>';
+echo 'Méthode de la requête HTTP : ' . $_SERVER['REQUEST_METHOD'] . '<br>';
+// Afficher une variable d'environnement (peut ne pas être définie sur tous les serveurs)
+if (isset($_ENV['PATH'])) {
+    echo 'Chemin d\'accès aux exécutables : ' . $_ENV['PATH'] . '<br>';
+}
+?>
+
   </body>
 </html>
