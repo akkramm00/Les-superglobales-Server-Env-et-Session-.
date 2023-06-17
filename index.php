@@ -53,8 +53,10 @@ if (isset($_ENV['PATH'])) {
 }
 ?>
 
-    
+ <!--=================================================================-->
+   
 
+    
     <h2> PARTIE TROIS DU COURS .</h2>
 	<pre>
 	<h1>Connexion</h1>
@@ -88,6 +90,9 @@ if ($serv_protocol === 'HTTPS') {
 }
 ?>
 
+<!--=================================================================-->
+
+
 
 <h2>QUATRIEME PARTIE DU COURS</h2>
 <h3> tableaux associatif contenant deux produits</h3>
@@ -113,6 +118,8 @@ echo " Produit non trouvé avec l'id ".$idproduit;
 }
 ?>
 
+<!--=================================================================-->
+
 
 <h2> CINQUIEME PARTIE DU COURS : START8 SESSION.</h2>
 
@@ -135,6 +142,9 @@ $nom_utilisateur = $_SESSION['nom_utilisateur'];
 echo $nom_utilisateur; // affiche " Alexandre "
 
 ?> 
+
+<!--=================================================================-->
+
 
 <h2> 7EME PARTIE DU COURS :CONNEXION FORM !.</h2>   
 	<h3>Connexion</h3>
@@ -169,6 +179,7 @@ if($_SERVER['REQUEST_METHOD'] === "POST") {
     }
 }
 ?>
+<!--=================================================================-->
 
 
 <h2> 8EME PARTIE DU COURS :ENVIRONNEMENT ET SESSION !</h2>  
@@ -187,6 +198,7 @@ try {
   	echo " Erreur de connexion à la base de donnée ". $e->getMessage();
    }
 ?>
+<!--=================================================================-->
 
 <h1> TRAITEMENT DES FICHIERS </h1>
 <h2> GET , POST ET FILE</h2>
@@ -207,8 +219,18 @@ echo '<br>';
 echo $plat;
 echo '</br>';
 ?>
+<!--=================================================================-->
 
 <h2> LA MANIPULATION DES FICHIERS</h2>
+
+
+    <?php
+$file = fopen("monfichier.txt", "r");
+$content = fread($file, filesize("monfichier.txt"));
+fclose($file);
+echo $content;
+?> 
+<!--=================================================================-->
 
     <?php
 $file = fopen("monfichier.txt", "r");
@@ -220,6 +242,102 @@ if ($file) {
 }
 ?> 
 
+<!--=================================================================-->
+
+<?php
+$contents = file_get_contents('monfichier.txt');
+echo $contents;
+?> 
+<!--=================================================================-->
+<?php
+$file = fopen("monfichier.txt", "w");
+$content = "Bonjour, comment ça va?";
+$bytes_written = fwrite($file, $content);
+fclose($file);
+if($bytes_written !== false) {
+  echo "Ecriture de " . $bytes_written . " octets réussie.";
+} else {
+  echo "Erreur lors de l'écriture du fichier.";
+}
+?> 
+
+<!--=================================================================-->
+
+<?php
+
+$file = 'monfichier.txt';
+$content = 'Contenu à écrire dans le fichier';
+file_put_contents($file, $content);
+
+?> 
+
+<!--=================================================================-->
+
+<?php
+
+$file = fopen("monfichier1.txt", "w");
+if($file) {
+    fwrite($file, " Voici un texte d'exemple pour monfichier1.txt");
+}
+fclose($file);
+$count = 0;
+$file_count = fopen('monfichier1.txt', 'r');
+
+?> 
+<!--=================================================================-->
+
+<?php
+
+$file = fopen("monfichier1.txt", "w");
+if($file) {
+    fwrite($file, " Voici un texte d'exemple pour monfichier1.txt");
+}
+fclose($file);
+$count = 0;
+$file_count = fopen('monfichier1.txt', 'r');
+
+  while(!feof($file_count)) {
+        $line = fgets($file_count);
+        $count++;    }
+echo " Le fichier contient " .$count . " lignes";
+$file_add = fopen('monfichier1.txt', 'a');
+
+?> 
+
+<!--=================================================================-->
+
+<?php
+
+$file = fopen("monfichier1.txt", "w");
+
+if($file) {
+    fwrite($file, " Voici un texte d'exemple pour monfichier1.txt");
+}
+fclose($file);
+$count = 0;
+$file_count = fopen('monfichier1.txt', 'r');
+
+  while(!feof($file_count)) {
+        $line = fgets($file_count);
+        $count++;    }
+echo " Le fichier contient " .$count . " lignes";
+$file_add = fopen('monfichier1.txt', 'a');
+
+if($file_add) { 
+    fwrite($file_add,  "\nNouvelle entrée");
+    fclose($file_add);
+}
+$file_update = fopen('monfichier1.txt', 'r');
+echo "<br><br> Le fichier contient desormais : ";
+while(!feof($file_update)) { 
+    $line = fgets($file_update);
+    echo "<br>".$line;
+}
+fclose($file_update);
+
+?> 
+
+<!--=================================================================-->
 
   </body>
 </html>
